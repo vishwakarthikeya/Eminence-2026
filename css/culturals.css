@@ -1,0 +1,596 @@
+/* culturals.css - Cultural Events Page Styles */
+
+/* Cultural Hero Section */
+.cultural-hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+                rgba(106, 13, 173, 0.2) 0%, 
+                rgba(236, 72, 153, 0.3) 50%, 
+                rgba(255, 215, 79, 0.1) 100%);
+}
+
+.cultural-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 79, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(106, 13, 173, 0.2) 0%, transparent 50%);
+    z-index: -1;
+    animation: pulseMusic 8s infinite alternate;
+}
+
+@keyframes pulseMusic {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+.cultural-icon {
+    font-size: 5rem;
+    color: var(--neon-pink);
+    margin-bottom: 20px;
+    animation: dance 3s infinite alternate;
+    filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.7));
+}
+
+@keyframes dance {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(-5deg);
+    }
+}
+
+.cultural-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, var(--neon-pink), var(--soft-yellow), var(--accent-orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 2px;
+    text-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
+    animation: titleGlow 3s infinite alternate;
+}
+
+.cultural-subtitle {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--soft-yellow);
+}
+
+.cultural-tagline {
+    font-size: 1.3rem;
+    color: var(--cyan);
+    margin-bottom: 40px;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+.hero-notes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.hero-notes i {
+    position: absolute;
+    font-size: 2rem;
+    color: var(--neon-pink);
+    opacity: 0.6;
+    animation: floatNote 15s infinite linear;
+}
+
+.note-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.note-2 {
+    top: 40%;
+    left: 85%;
+    animation-delay: 3s;
+    color: var(--soft-yellow);
+}
+
+.note-3 {
+    top: 70%;
+    left: 15%;
+    animation-delay: 6s;
+    color: var(--cyan);
+}
+
+.note-4 {
+    top: 30%;
+    left: 70%;
+    animation-delay: 9s;
+    color: var(--accent-orange);
+}
+
+@keyframes floatNote {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Live Stream Section */
+.live-section {
+    padding: 100px 0;
+    background: rgba(11, 15, 26, 0.8);
+    position: relative;
+}
+
+.live-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 10%, rgba(236, 72, 153, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 90%, rgba(255, 215, 79, 0.05) 0%, transparent 50%);
+    z-index: -1;
+}
+
+.live-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.live-player {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.live-placeholder {
+    padding: 60px 40px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), rgba(236, 72, 153, 0.1));
+}
+
+.live-placeholder i {
+    font-size: 4rem;
+    color: var(--neon-pink);
+    margin-bottom: 20px;
+}
+
+.live-placeholder p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: var(--soft-yellow);
+}
+
+.live-countdown {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--cyan);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: var(--soft-yellow);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.youtube-embed {
+    width: 100%;
+    height: 500px;
+}
+
+.live-schedule {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.live-schedule h3 {
+    font-size: 1.5rem;
+    color: var(--soft-yellow);
+    margin-bottom: 25px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.live-schedule h3 i {
+    color: var(--neon-pink);
+    margin-right: 10px;
+}
+
+.schedule-list {
+    list-style: none;
+}
+
+.schedule-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.schedule-list li:last-child {
+    border-bottom: none;
+}
+
+.schedule-time {
+    color: var(--cyan);
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 120px;
+}
+
+.schedule-event {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: right;
+    flex: 1;
+}
+
+/* Cultural Events Grid */
+.cultural-events {
+    padding: 100px 0;
+    background: rgba(5, 8, 17, 0.7);
+    position: relative;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.cultural-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.cultural-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    border-color: var(--cyan);
+}
+
+.cultural-card.dance:hover {
+    border-color: var(--neon-pink);
+}
+
+.cultural-card.singing:hover {
+    border-color: var(--cyan);
+}
+
+.cultural-card.drama:hover {
+    border-color: var(--accent-orange);
+}
+
+.cultural-card.fashion:hover {
+    border-color: var(--soft-yellow);
+}
+
+.event-image {
+    height: 200px;
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.2), rgba(236, 72, 153, 0.2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+
+.cultural-card.dance .event-image {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(106, 13, 173, 0.2));
+}
+
+.cultural-card.singing .event-image {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(37, 99, 235, 0.2));
+}
+
+.cultural-card.drama .event-image {
+    background: linear-gradient(135deg, rgba(255, 122, 0, 0.2), rgba(236, 72, 153, 0.2));
+}
+
+.cultural-card.fashion .event-image {
+    background: linear-gradient(135deg, rgba(255, 215, 79, 0.2), rgba(255, 122, 0, 0.2));
+}
+
+.cultural-card.band .event-image {
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.2), rgba(34, 211, 238, 0.2));
+}
+
+.cultural-card.arts .event-image {
+    background: linear-gradient(135deg, rgba(255, 122, 0, 0.2), rgba(255, 215, 79, 0.2));
+}
+
+.cultural-card.flashmob .event-image {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(236, 72, 153, 0.2));
+}
+
+.cultural-card.dj .event-image {
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.2), rgba(37, 99, 235, 0.2));
+}
+
+.event-image i {
+    color: white;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.event-content {
+    padding: 25px;
+}
+
+.event-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.event-category {
+    color: var(--cyan);
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-desc {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.event-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.event-info p {
+    display: flex;
+    align-items: center;
+    color: var(--soft-yellow);
+    font-size: 0.85rem;
+}
+
+.event-info i {
+    margin-right: 8px;
+    color: var(--cyan);
+    font-size: 0.9rem;
+}
+
+.register-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--electric-blue), var(--deep-purple));
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, var(--neon-pink), var(--accent-orange));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+}
+
+/* Cultural Schedule */
+.cultural-schedule {
+    padding: 100px 0;
+    background: rgba(11, 15, 26, 0.9);
+    position: relative;
+}
+
+.schedule-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.schedule-day {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    transition: transform 0.3s ease;
+}
+
+.schedule-day:hover {
+    transform: translateY(-10px);
+    border-color: var(--neon-pink);
+}
+
+.day-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--soft-yellow);
+    margin-bottom: 25px;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(236, 72, 153, 0.3);
+}
+
+.day-events {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.time-slot {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-left: 4px solid var(--cyan);
+    transition: all 0.3s ease;
+}
+
+.time-slot:hover {
+    background: rgba(236, 72, 153, 0.1);
+    border-left-color: var(--neon-pink);
+    transform: translateX(5px);
+}
+
+.time {
+    color: var(--cyan);
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 150px;
+}
+
+.event {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: right;
+    flex: 1;
+}
+
+/* Responsive Styles for Cultural Page */
+@media screen and (max-width: 1200px) {
+    .live-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .schedule-table {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cultural-title {
+        font-size: 3rem;
+    }
+    
+    .cultural-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .cultural-tagline {
+        font-size: 1.1rem;
+        padding: 0 25px;
+    }
+    
+    .events-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+    
+    .live-placeholder {
+        padding: 40px 20px;
+    }
+    
+    .live-placeholder i {
+        font-size: 3rem;
+    }
+    
+    .live-countdown {
+        gap: 15px;
+    }
+    
+    .countdown-number {
+        font-size: 2rem;
+        min-width: 60px;
+        padding: 8px 15px;
+    }
+    
+    .schedule-table {
+        padding: 0 15px;
+    }
+    
+    .time-slot {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .time, .event {
+        text-align: left;
+        min-width: auto;
+    }
+}
