@@ -1,0 +1,287 @@
+/* mobile.css - Mobile Responsive Styles */
+/* Technofest Website - Mobile Optimized */
+
+/* Mobile Navigation */
+@media screen and (max-width: 768px) {
+    /* Navigation adjustments */
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(11, 15, 26, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        gap: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        border-bottom: 1px solid var(--glass-border);
+        z-index: 999;
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        width: 80%;
+        text-align: center;
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+    
+    .nav-hamburger {
+        display: flex;
+        z-index: 1000;
+    }
+    
+    .nav-hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .nav-hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    /* Hero section adjustments */
+    .hero {
+        padding-top: 100px;
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 80px;
+    }
+    
+    .college-logo {
+        font-size: 3rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+        line-height: 1.4;
+        padding: 0 20px;
+    }
+    
+    .hero-tagline {
+        font-size: 1.1rem;
+        padding: 0 25px;
+    }
+    
+    .explore-btn {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+    }
+    
+    /* Section titles */
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+        padding: 0 20px;
+    }
+    
+    /* About section */
+    .about-section {
+        padding: 70px 0;
+    }
+    
+    .about-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .image-placeholder {
+        height: 250px;
+        font-size: 6rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+    
+    .stats {
+        gap: 15px;
+    }
+    
+    .stat-item {
+        min-width: calc(50% - 15px);
+        padding: 15px 10px;
+    }
+    
+    .stat-item h3 {
+        font-size: 2rem;
+    }
+    
+    /* Departments grid */
+    .departments-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0 10px;
+    }
+    
+    .dept-card {
+        padding: 25px 20px;
+    }
+    
+    .dept-icon {
+        font-size: 3rem;
+    }
+    
+    .dept-name {
+        font-size: 1.6rem;
+    }
+    
+    /* Schedule timeline */
+    .schedule-section {
+        padding: 70px 0;
+    }
+    
+    .schedule-timeline::before {
+        left: 25px;
+    }
+    
+    .timeline-item {
+        flex-direction: row !important;
+        margin-bottom: 40px;
+        align-items: flex-start;
+    }
+    
+    .timeline-date {
+        width: 80px;
+        height: 80px;
+        font-size: 0.9rem;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 120px);
+        padding: 20px;
+        margin: 0;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Footer adjustments */
+    .footer {
+        padding: 50px 0 20px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-col {
+        padding: 0 20px;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    /* Reduce animations for better performance */
+    .hero-background,
+    .college-logo,
+    .logo-icon,
+    .hero-title,
+    .dept-card,
+    .timeline-content,
+    .stat-item {
+        animation-duration: 1.5s;
+    }
+    
+    /* Remove some heavy effects on mobile */
+    .dept-card::before {
+        display: none;
+    }
+    
+    /* Ensure no horizontal scrolling */
+    body, html {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+    
+    .container, .nav-container {
+        padding: 0 15px;
+    }
+    
+    /* Touch-friendly buttons */
+    .explore-btn, .dept-btn, .nav-link {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Full width cards on mobile */
+    .dept-card, .timeline-content, .stat-item {
+        width: 100%;
+    }
+}
+
+/* Small mobile devices */
+@media screen and (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .stats {
+        flex-direction: column;
+    }
+    
+    .stat-item {
+        min-width: 100%;
+    }
+    
+    .timeline-date {
+        width: 70px;
+        height: 70px;
+        font-size: 0.8rem;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 100px);
+    }
+    
+    .footer-col {
+        padding: 0 10px;
+    }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

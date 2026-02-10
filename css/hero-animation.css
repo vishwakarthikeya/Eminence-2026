@@ -1,0 +1,564 @@
+/* HERO ANIMATION STYLES */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-animation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* BACKGROUND LAYERS */
+.scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.scene.active {
+    opacity: 1;
+}
+
+/* SCENE 1 - GRAND INTRO */
+.scene-1 {
+    background: #000;
+}
+
+.campus-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 10, 30, 0.8), rgba(30, 0, 50, 0.8)), 
+                url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    animation: zoomOutScene1 20s linear forwards;
+    filter: brightness(0.7) contrast(1.1);
+}
+
+.college-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeInName 2s ease-out 1s forwards;
+    width: 90%;
+}
+
+.college-name h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+    animation: textGlow 3s ease-in-out infinite alternate;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.college-name h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    animation: subtitlePulse 4s ease-in-out infinite;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.overlay-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 50, 100, 0.3), rgba(100, 0, 100, 0.2));
+    z-index: 1;
+}
+
+/* SCENE 2 - INNOVATION THEME */
+.scene-2 {
+    background: linear-gradient(135deg, #0a0a2a, #1a0033);
+}
+
+.innovation-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 50%, rgba(0, 150, 255, 0.1), transparent 50%),
+               radial-gradient(circle at 70% 20%, rgba(100, 0, 255, 0.1), transparent 50%);
+    animation: bgPulse 10s ease-in-out infinite alternate;
+}
+
+.innovation-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 90%;
+}
+
+.innovation-line {
+    font-size: 4rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: textFloat 8s ease-in-out infinite;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.innovation-line:nth-child(1) {
+    animation-delay: 0.5s;
+    color: #00ffff;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.innovation-line:nth-child(2) {
+    animation-delay: 1s;
+    color: #ff00ff;
+    text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+}
+
+.tech-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(0, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: particleFloat 15s linear infinite;
+}
+
+/* SCENE 3 - EVENT OVERVIEW */
+.scene-3 {
+    background: linear-gradient(45deg, #001122, #002244);
+}
+
+.event-grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 90%;
+    max-width: 1400px;
+    padding: 20px;
+}
+
+.day-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    color: white;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.day-card.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.day-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #00ffff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.day-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.day-content li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    list-style: none;
+}
+
+.day-content li:before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: #ff00ff;
+    font-size: 0.8rem;
+}
+
+.day-1 .day-title { color: #00ffff; }
+.day-2 .day-title { color: #ff9900; }
+.day-3 .day-title { color: #00ff99; }
+
+.event-highlight {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    opacity: 0.1;
+    animation: highlightPulse 5s ease-in-out infinite;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* ANIMATIONS */
+@keyframes zoomOutScene1 {
+    0% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInName {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
+    }
+    100% {
+        text-shadow: 0 5px 30px rgba(0, 255, 255, 0.8),
+                     0 0 60px rgba(0, 255, 255, 0.3);
+    }
+}
+
+@keyframes subtitlePulse {
+    0%, 100% {
+        opacity: 0.7;
+        letter-spacing: 6px;
+    }
+    50% {
+        opacity: 1;
+        letter-spacing: 8px;
+    }
+}
+
+@keyframes bgPulse {
+    0% {
+        background: radial-gradient(circle at 30% 50%, rgba(0, 150, 255, 0.1), transparent 50%),
+                   radial-gradient(circle at 70% 20%, rgba(100, 0, 255, 0.1), transparent 50%);
+    }
+    100% {
+        background: radial-gradient(circle at 40% 60%, rgba(0, 150, 255, 0.15), transparent 50%),
+                   radial-gradient(circle at 60% 30%, rgba(100, 0, 255, 0.15), transparent 50%);
+    }
+}
+
+@keyframes textFloat {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    20%, 80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+    }
+}
+
+@keyframes highlightPulse {
+    0%, 100% {
+        opacity: 0.1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.2;
+        transform: scale(1.1);
+    }
+}
+
+/* PROGRESS INDICATOR */
+.scene-progress {
+    position: absolute;
+    bottom: 80px; /* Adjusted to make room for button */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+    background: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    transform: scale(1.3);
+}
+
+/* TIMELINE */
+.timeline {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    z-index: 50;
+}
+
+.timeline-marker {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.timeline-marker.active {
+    border-color: #00ffff;
+    background: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.timeline-marker:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 100px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%);
+}
+
+.timeline-label {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.timeline-marker:hover .timeline-label {
+    opacity: 1;
+}
+
+/* EXPLORE BUTTON CONTAINER */
+.hero-button-container {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 150;
+}
+
+.explore-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 40px;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 25px rgba(0, 255, 255, 0.4);
+    animation: buttonPulse 2s infinite;
+}
+
+.explore-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(0, 255, 255, 0.6);
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+}
+
+.explore-btn i {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.explore-btn:hover i {
+    transform: translateX(5px);
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        box-shadow: 0 5px 25px rgba(0, 255, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 5px 35px rgba(0, 255, 255, 0.7);
+    }
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 1024px) {
+    .college-name h1 {
+        font-size: 3rem;
+    }
+    
+    .college-name h2 {
+        font-size: 1.5rem;
+    }
+    
+    .innovation-line {
+        font-size: 3rem;
+    }
+    
+    .event-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        top: 45%;
+    }
+    
+    .day-card {
+        padding: 20px;
+    }
+    
+    .scene-progress {
+        bottom: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 90vh;
+    }
+    
+    .college-name h1 {
+        font-size: 2.5rem;
+    }
+    
+    .innovation-line {
+        font-size: 2.5rem;
+    }
+    
+    .day-title {
+        font-size: 1.8rem;
+    }
+    
+    .timeline {
+        display: none;
+    }
+    
+    .explore-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+    
+    .event-highlight {
+        font-size: 2rem;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .college-name h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    
+    .college-name h2 {
+        font-size: 1rem;
+        letter-spacing: 3px;
+    }
+    
+    .innovation-line {
+        font-size: 1.8rem;
+    }
+    
+    .event-grid {
+        top: 40%;
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .day-card {
+        padding: 15px;
+    }
+    
+    .scene-progress {
+        bottom: 120px;
+    }
+}
