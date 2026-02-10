@@ -562,3 +562,130 @@
         bottom: 120px;
     }
 }
+@media (max-width: 480px) {
+
+    /* HERO HEIGHT CONTROL */
+    .hero {
+        height: 100vh;
+        min-height: 600px;
+        padding: 20px 0;
+    }
+
+    /* CENTER HERO CONTENT */
+    .college-name {
+        top: 45%;
+        width: 92%;
+        padding: 0 10px;
+    }
+
+    /* LOGO */
+    #logo-hero {
+        width: 120px;
+        max-width: 60vw;
+        height: auto;
+        margin: 0 auto 12px;
+        display: block;
+    }
+
+    /* MAIN TITLE */
+    .college-name h1 {
+        font-size: 1.6rem;
+        line-height: 1.25;
+        letter-spacing: 1.2px;
+        margin-bottom: 6px;
+    }
+
+    /* DESCRIPTION TEXT */
+    .college-name h2 {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        letter-spacing: 1.5px;
+        margin-top: 8px;
+    }
+
+    /* DISABLE HEAVY EFFECTS FOR MOBILE */
+    .tech-particles {
+        display: none;
+    }
+
+    .innovation-bg {
+        opacity: 0.6;
+    }
+}
+@media (max-width: 480px) {
+
+    /* SCENE 3 CONTAINER */
+    .scene-3 {
+        padding-top: 60px;
+    }
+
+    /* BACKGROUND TEXT */
+    .event-highlight {
+        font-size: 1.5rem;
+        top: 10px;
+        right: 10px;
+        opacity: 0.08;
+    }
+
+    /* EVENT GRID */
+    .event-grid {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 95%;
+        margin: 0 auto;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 10px 0;
+    }
+
+    /* DAY CARDS */
+    .day-card {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .day-title {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+
+    .day-content {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .day-content li {
+        margin-bottom: 8px;
+        padding-left: 18px;
+    }
+
+    .day-content li::before {
+        font-size: 0.7rem;
+    }
+}
+/* 3D NETWORK BACKGROUND */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0,255,255,0.12), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,0,255,0.12), transparent 40%),
+        linear-gradient(120deg, #050014, #0a0020, #000814);
+    animation: muralShift 14s ease-in-out infinite alternate;
+    z-index: 0;
+    transform: translateZ(-1px) scale(1.2);
+}
+
+@keyframes muralShift {
+    0% {
+        filter: hue-rotate(0deg);
+        transform: scale(1.15);
+    }
+    100% {
+        filter: hue-rotate(40deg);
+        transform: scale(1.25);
+    }
+}

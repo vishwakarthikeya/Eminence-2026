@@ -20,9 +20,9 @@
             </div>
             
             <div class="nav-menu">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="#departments" class="nav-link">Events</a>
-                <a href="culturals.html" class="nav-link">Culturals</a>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#departments" class="nav-link">Events</a>
+                <a href="culturals.html" class="nav-link active">Culturals</a>
                 <a href="annualday.html" class="nav-link">Annual Day</a>
             </div>
             
@@ -142,7 +142,7 @@
             <div class="about-content">
                 <div class="about-image">
                     <div class="image-placeholder">
-                        <img src="assets/college.jpg" alt="college-image" height="350px" width="500px">
+                        <img src="assets/college.jpg" alt="college-image">
                     </div>
                 </div>
                 <div class="about-text">
@@ -395,6 +395,28 @@
             </div>
         </div>
     </footer>
+
+     <script>
+        // Mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.nav-hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
     <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>

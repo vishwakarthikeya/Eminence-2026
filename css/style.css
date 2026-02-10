@@ -850,7 +850,8 @@ body::before {
     }
 }
 
-#logo-hero{
-    height: 250px;
+#logo-hero {
     width: 250px;
+    height: auto;
+    max-width: 70vw;   /* responsive on small screens */
 }

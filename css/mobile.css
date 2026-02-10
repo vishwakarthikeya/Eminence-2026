@@ -285,3 +285,8 @@
         transition-duration: 0.01ms !important;
     }
 }
+#logo-hero {
+    width: 250px;
+    height: auto;
+    max-width: 70vw;   /* responsive on small screens */
+}
