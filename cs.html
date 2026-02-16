@@ -43,6 +43,33 @@
             letter-spacing: 2px;
             text-shadow: 0 0 15px rgba(0,0,0,0.8);
         }
+        /* =========================
+   MOBILE HERO VIDEO FIX
+   ========================= */
+@media screen and (max-width: 768px) {
+
+    .hero-video {
+        height: 65vh; /* shorter height for phones */
+    }
+
+    .hero-video iframe {
+        width: 100vw;
+        height: 56.25vw; /* 16:9 ratio */
+        min-height: 100%;
+        min-width: 177.77vh; /* ensures full coverage */
+    }
+
+    /* Bottom Cybersecurity Text */
+    .hero-text-bottom {
+        font-size: 24px;
+        bottom: 20px;
+        letter-spacing: 1px;
+        text-align: center;
+        width: 100%;
+        padding: 0 10px;
+    }
+}
+
     </style>
 </head>
 
@@ -277,4 +304,5 @@
 <script src="js/admin.js"></script>
 <script src="js/logout.js"></script>
 </body>
+
 </html>
