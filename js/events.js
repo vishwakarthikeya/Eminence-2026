@@ -71,7 +71,7 @@ class EventManager {
         if (existingHint) existingHint.remove();
         
         // Add admin hint if admin is logged in
-        if (authManager.isAdmin) {
+        if (window.authManager && window.authManager.isAdmin) {
             const adminHint = document.createElement('div');
             adminHint.className = 'admin-hint admin-only';
             adminHint.style.cssText = `
@@ -84,7 +84,7 @@ class EventManager {
                 border-radius: 10px;
                 border: 1px solid rgba(34, 211, 238, 0.3);
                 max-width: 600px;
-                display: ${authManager.isAdmin ? 'block' : 'none'};
+                display: ${window.authManager.isAdmin ? 'block' : 'none'};
             `;
             adminHint.innerHTML = `
                 <i class="fas fa-user-shield"></i> 
@@ -208,7 +208,7 @@ class EventManager {
         this.updateCardContent(card, eventData, type);
         
         // Add admin controls if user is admin
-        if (authManager.isAdmin) {
+        if (window.authManager && window.authManager.isAdmin) {
             this.addAdminControls(card, eventData);
         }
 
@@ -219,19 +219,35 @@ class EventManager {
         const card = document.createElement('div');
         card.className = 'event-card';
         
-        // Create structure matching existing HTML
-        card.innerHTML = `
-            <div class="event-image">
-                <i class="fas fa-robot"></i>
-            </div>
-            <div class="event-content">
-                <div class="event-day"></div>
-                <h3 class="event-title"></h3>
-                <p class="event-desc"></p>
-                <div class="event-details"></div>
-                <a href="#" target="_blank" class="event-register-btn">Register Now</a>
-            </div>
+        // 🔥 ADDED: Improved image container styling
+        const imageDiv = document.createElement('div');
+        imageDiv.className = 'event-image';
+        imageDiv.style.cssText = `
+            height: 380px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         `;
+        
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-calendar';
+        icon.style.cssText = 'font-size: 3rem; color: var(--soft-yellow);';
+        imageDiv.appendChild(icon);
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'event-content';
+        contentDiv.innerHTML = `
+            <div class="event-day"></div>
+            <h3 class="event-title"></h3>
+            <p class="event-desc"></p>
+            <div class="event-details"></div>
+            <a href="#" target="_blank" class="event-register-btn">Register Now</a>
+        `;
+        
+        card.appendChild(imageDiv);
+        card.appendChild(contentDiv);
         
         return card;
     }
@@ -277,21 +293,45 @@ class EventManager {
             }
         }
 
-        // Update icon based on event type
-        const iconElement = card.querySelector('.event-image i');
-        if (iconElement) {
-            const iconMap = {
-                'technical': 'fa-robot',
-                'non-technical': 'fa-gamepad',
-                'ai-model': 'fa-brain',
-                'hackathon': 'fa-chart-line',
-                'workshop': 'fa-eye',
-                'trivia': 'fa-gamepad',
-                'puzzle': 'fa-puzzle-piece',
-                'art': 'fa-palette'
-            };
+        // 🔥 ADDED: Replace icon with image if imageUrl exists
+        const imageContainer = card.querySelector('.event-image');
+        if (imageContainer) {
+            // Clear existing content
+            imageContainer.innerHTML = '';
             
-            iconElement.className = `fas ${iconMap[eventData.icon] || 'fa-calendar'}`;
+            if (eventData.imageUrl) {
+                const img = document.createElement('img');
+                img.src = eventData.imageUrl;
+                img.loading = 'lazy';
+                
+                // 🔥 ADDED: Fade-in animation
+                const style = document.createElement('style');
+                if (!document.querySelector('#fadeInAnimation')) {
+                    style.id = 'fadeInAnimation';
+                    style.textContent = `
+                        @keyframes fadeIn {
+                            from { opacity: 0; transform: scale(1.05); }
+                            to { opacity: 1; transform: scale(1); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                img.onerror = () => {
+                    imageContainer.innerHTML = '';
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-calendar';
+                    icon.style.cssText = 'font-size: 3rem; color: var(--soft-yellow);';
+                    imageContainer.appendChild(icon);
+                };
+                
+                imageContainer.appendChild(img);
+            } else {
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-calendar';
+                icon.style.cssText = 'font-size: 3rem; color: var(--soft-yellow);';
+                imageContainer.appendChild(icon);
+            }
         }
     }
 
@@ -302,7 +342,7 @@ class EventManager {
             position: absolute;
             top: 10px;
             right: 10px;
-            display: ${authManager.isAdmin ? 'flex' : 'none'};
+            display: ${window.authManager && window.authManager.isAdmin ? 'flex' : 'none'};
             gap: 5px;
             z-index: 10;
         `;
@@ -338,12 +378,12 @@ class EventManager {
             this.renderEvents();
             
             if (window.showToast) {
-                showToast('Event deleted successfully', 'success');
+                window.showToast('Event deleted successfully', 'success');
             }
         } catch (error) {
             console.error('Error deleting event:', error);
             if (window.showToast) {
-                showToast('Failed to delete event. Please try again.', 'error');
+                window.showToast('Failed to delete event. Please try again.', 'error');
             }
         }
     }
@@ -351,9 +391,158 @@ class EventManager {
     openEditModal(eventData) {
         // Implementation for edit modal
         // Similar to add event form
-        window.adminManager.openEventForm(eventData);
+        if (window.adminManager) {
+            window.adminManager.openEventForm(eventData);
+        }
     }
 }
+
+// 🔥 ADDED: Extend adminManager to support image URL field and live preview
+(function extendAdminManager() {
+    // Wait for adminManager to be available
+    const checkAdminManager = setInterval(() => {
+        if (window.adminManager && window.adminManager.openEventForm) {
+            clearInterval(checkAdminManager);
+            
+            const originalOpenEventForm = window.adminManager.openEventForm;
+            
+            window.adminManager.openEventForm = function(eventData = null) {
+                // Call original method to create form
+                originalOpenEventForm.call(this, eventData);
+                
+                // 🔥 ADDED: Add image URL field and preview to form
+                setTimeout(() => {
+                    const modal = document.getElementById('event-form-modal');
+                    if (!modal) return;
+                    
+                    const form = document.getElementById('event-form');
+                    if (!form) return;
+                    
+                    // Check if field already exists
+                    if (document.getElementById('eventImageUrl')) return;
+                    
+                    // Find where to insert the image field (after description)
+                    const descField = document.getElementById('event-desc')?.parentNode;
+                    
+                    if (descField) {
+                        // Create image URL field container
+                        const imageFieldContainer = document.createElement('div');
+                        imageFieldContainer.style.cssText = 'margin-bottom: 15px;';
+                        
+                        imageFieldContainer.innerHTML = `
+                            <label for="eventImageUrl" style="display: block; color: var(--soft-yellow); margin-bottom: 5px;">
+                                <i class="fas fa-image"></i> Event Image URL (Optional)
+                            </label>
+                            <input type="url" id="eventImageUrl" 
+                                   placeholder="https://example.com/image.jpg" 
+                                   value="${eventData?.imageUrl || ''}"
+                                   style="width: 100%; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white;">
+                            <div id="imagePreview" style="margin-top: 10px; min-height: 50px;"></div>
+                        `;
+                        
+                        // Insert after description field
+                        descField.parentNode.insertBefore(imageFieldContainer, descField.nextSibling);
+                        
+                        // 🔥 ADDED: Live preview logic
+                        const imageInput = document.getElementById('eventImageUrl');
+                        const preview = document.getElementById('imagePreview');
+                        
+                        if (imageInput && preview) {
+                            // Initial preview if value exists
+                            if (imageInput.value.trim()) {
+                                showPreview(imageInput.value.trim());
+                            }
+                            
+                            imageInput.addEventListener('input', function() {
+                                showPreview(this.value.trim());
+                            });
+                            
+                            function showPreview(url) {
+                                preview.innerHTML = '';
+                                
+                                if (!url) {
+                                    preview.innerHTML = '<p style="color: #9ca3af; font-size: 0.85rem; padding: 10px 0;">Enter an image URL to see preview</p>';
+                                    return;
+                                }
+                                
+                                const img = document.createElement('img');
+                                img.src = url;
+                                img.loading = 'lazy';
+                                // 🔥 UPDATED: New CSS for preview images
+                                img.style.cssText = `
+                                    width: 100%;
+                                    height: auto;
+                                    max-height: 380px;
+                                    object-fit: contain;
+                                    border-radius: 10px;
+                                    border: 2px solid rgba(34, 211, 238, 0.4);
+                                    animation: fadeIn 0.3s ease-in;
+                                `;
+                                
+                                img.onerror = () => {
+                                    preview.innerHTML = '<p style="color: #ef4444; font-size: 0.85rem; padding: 10px; background: rgba(239,68,68,0.1); border-radius: 5px;"><i class="fas fa-exclamation-triangle"></i> Invalid image URL - preview not available</p>';
+                                };
+                                
+                                preview.appendChild(img);
+                            }
+                        }
+                    }
+                    
+                    // 🔥 ADDED: Modify saveEvent to include imageUrl
+                    const originalSaveEvent = window.adminManager.saveEvent;
+                    if (originalSaveEvent) {
+                        window.adminManager.saveEvent = async function() {
+                            // Get image URL
+                            const imageUrl = document.getElementById('eventImageUrl')?.value.trim() || null;
+                            
+                            const eventData = {
+                                title: document.getElementById('event-title').value,
+                                description: document.getElementById('event-desc').value,
+                                date: document.getElementById('event-date').value,
+                                day: document.getElementById('event-day').value,
+                                time: document.getElementById('event-time').value,
+                                venue: document.getElementById('event-venue').value,
+                                type: document.getElementById('event-type').value,
+                                formLink: document.getElementById('event-formlink').value,
+                                department: window.eventManager ? (window.eventManager.currentDepartment === 'all' ? 'general' : window.eventManager.currentDepartment) : 'general',
+                                // 🔥 ADDED: Include image URL
+                                imageUrl: imageUrl,
+                                createdAt: firebase.database.ServerValue.TIMESTAMP,
+                                updatedAt: firebase.database.ServerValue.TIMESTAMP
+                            };
+
+                            try {
+                                if (this.currentEditId) {
+                                    await firebaseDatabase.ref(`events/${this.currentEditId}`).update(eventData);
+                                    if (window.showToast) {
+                                        window.showToast('Event updated successfully', 'success');
+                                    }
+                                } else {
+                                    const newEventRef = firebaseDatabase.ref('events').push();
+                                    await newEventRef.set(eventData);
+                                    if (window.showToast) {
+                                        window.showToast('Event added successfully', 'success');
+                                    }
+                                }
+                                
+                                this.closeEventForm();
+                                if (window.eventManager) {
+                                    window.eventManager.loadEvents();
+                                }
+                                
+                            } catch (error) {
+                                console.error('Error saving event:', error);
+                                if (window.showToast) {
+                                    window.showToast('Failed to save event. Please try again.', 'error');
+                                }
+                            }
+                        };
+                    }
+                }, 100);
+            };
+        }
+    }, 100);
+})();
 
 // Initialize event manager
 const eventManager = new EventManager();

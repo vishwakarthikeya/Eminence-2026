@@ -135,6 +135,17 @@ class AdminManager {
                                   style="width: 100%; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white;"></textarea>
                     </div>
                     
+                    <!-- 🔥 ADDED: Image URL field with preview -->
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; color: var(--soft-yellow); margin-bottom: 5px;">
+                            <i class="fas fa-image"></i> Event Image URL (Optional)
+                        </label>
+                        <input type="url" id="eventImageUrl" 
+                               placeholder="https://example.com/image.jpg"
+                               style="width: 100%; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white;">
+                        <div id="imagePreview" style="margin-top: 8px; min-height: 40px;"></div>
+                    </div>
+                    
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                         <div>
                             <label style="display: block; color: var(--soft-yellow); margin-bottom: 5px;">Date *</label>
@@ -230,6 +241,43 @@ class AdminManager {
                 this.closeEventForm();
             }
         });
+        
+        // 🔥 ADDED: Image preview logic
+        this.setupImagePreview();
+    }
+
+    // 🔥 ADDED: Setup live image preview
+    setupImagePreview() {
+        setTimeout(() => {
+            const imageInput = document.getElementById('eventImageUrl');
+            const preview = document.getElementById('imagePreview');
+            
+            if (imageInput && preview) {
+                imageInput.addEventListener('input', () => {
+                    const url = imageInput.value.trim();
+                    preview.innerHTML = '';
+                    
+                    if (!url) return;
+                    
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.style.cssText = `
+                        width: 100%;
+                        max-height: 180px;
+                        object-fit: cover;
+                        border-radius: 8px;
+                        border: 2px solid rgba(34, 211, 238, 0.4);
+                        margin-top: 8px;
+                    `;
+                    
+                    img.onerror = () => {
+                        preview.innerHTML = '<p style="color: #ef4444; font-size: 0.85rem; padding: 10px; background: rgba(239,68,68,0.1); border-radius: 5px;"><i class="fas fa-exclamation-triangle"></i> Invalid image URL</p>';
+                    };
+                    
+                    preview.appendChild(img);
+                });
+            }
+        }, 100);
     }
 
     showAdminControls() {
@@ -265,6 +313,17 @@ class AdminManager {
             document.getElementById('event-venue').value = eventData.venue;
             document.getElementById('event-type').value = eventData.type;
             document.getElementById('event-formlink').value = eventData.formLink;
+            
+            // 🔥 ADDED: Prefill image URL when editing
+            const imageInput = document.getElementById('eventImageUrl');
+            if (imageInput && eventData.imageUrl) {
+                imageInput.value = eventData.imageUrl;
+                
+                // Trigger preview
+                setTimeout(() => {
+                    imageInput.dispatchEvent(new Event('input'));
+                }, 100);
+            }
         } else {
             // Add mode
             formTitle.textContent = 'Add Event';
@@ -275,6 +334,10 @@ class AdminManager {
             // Set default date to today
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('event-date').value = today;
+            
+            // 🔥 ADDED: Clear image preview
+            const preview = document.getElementById('imagePreview');
+            if (preview) preview.innerHTML = '';
         }
         
         this.eventForm.style.display = 'flex';
@@ -284,9 +347,16 @@ class AdminManager {
         this.eventForm.style.display = 'none';
         this.currentEditId = null;
         document.getElementById('event-form').reset();
+        
+        // 🔥 ADDED: Clear preview
+        const preview = document.getElementById('imagePreview');
+        if (preview) preview.innerHTML = '';
     }
 
     async saveEvent() {
+        // 🔥 ADDED: Get image URL
+        const imageUrl = document.getElementById('eventImageUrl')?.value.trim() || null;
+        
         const eventData = {
             title: document.getElementById('event-title').value,
             description: document.getElementById('event-desc').value,
@@ -297,6 +367,8 @@ class AdminManager {
             type: document.getElementById('event-type').value,
             formLink: document.getElementById('event-formlink').value,
             department: eventManager.currentDepartment === 'all' ? 'general' : eventManager.currentDepartment,
+            // 🔥 ADDED: Include image URL in event data
+            imageUrl: imageUrl,
             createdAt: firebase.database.ServerValue.TIMESTAMP,
             updatedAt: firebase.database.ServerValue.TIMESTAMP
         };
