@@ -281,13 +281,22 @@ class EventManager {
             `;
         }
 
-        // Update register button
+        // 🔥 UPDATED: Optional registration link with fallback
         const registerBtn = card.querySelector('.event-register-btn');
-        if (registerBtn && eventData.formLink) {
-            registerBtn.href = eventData.formLink;
-            registerBtn.target = '_blank';
-            
-            // Update button text based on event type
+        if (registerBtn) {
+            const formLink = (eventData.formLink || '').trim();
+
+            if (formLink) {
+                // If Google Form exists → open it
+                registerBtn.href = formLink;
+                registerBtn.target = '_blank';
+            } else {
+                // 🔥 FALLBACK: Open default register page
+                registerBtn.href = 'defaultRegister.html';
+                registerBtn.target = '_self';
+            }
+
+            // Update button text for non-technical events
             if (type === 'non-technical') {
                 registerBtn.textContent = eventData.buttonText || 'Join Now';
             }
