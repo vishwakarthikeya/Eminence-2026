@@ -839,3 +839,22 @@
         break-inside: avoid;
     }
 }
+/* 🔥 FULL POSTER MODE */
+.event-image {
+    height: auto !important;
+    min-height: 220px;
+    max-height: 400px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.event-image img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: contain;   /* ⭐ KEY FIX */
+    border-radius: 10px;
+}
