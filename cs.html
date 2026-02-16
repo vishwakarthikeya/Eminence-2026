@@ -1,56 +1,82 @@
 <!DOCTYPE html>
-<!-- Title: Cyber Security
-Tagline: Digital Defense & Security Systems
-Description: Protecting digital assets and information systems through advanced security protocols, ethical hacking, and risk management strategies. The Cyber Security department prepares experts for the evolving digital threat landscape.-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI & ML Events - Sri Indu Technofest</title>
+    <title>Cyber Security Events - Sri Indu Technofest</title>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 768px)">
-     <link rel="stylesheet" href="css/department.css">
-    <link rel="stylesheet" href="department.css" media="screen and (max-width: 768px)" >
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <!-- Navigation (same as index.html) -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <img src="assets/EMINENCE_JPG.png" alt="Logo" class="logo-icon" height="60px" width="60px">
-                <span class="logo-text">Eminence'26</span>
-            </div>
-            
-            <div class="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="index.html#departments" class="nav-link">Events</a>
-                <a href="culturals.html" class="nav-link">Culturals</a>
-                <a href="annualday.html" class="nav-link">Annual Day</a>
-            </div>
-            
-            <div class="nav-hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <link rel="stylesheet" href="css/department.css">
 
-    <!-- Department Header -->
-    <section class="dept-header">
-        <div class="container">
-            <div class="dept-header-content">
-                <div class="dept-header-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h1 class="dept-header-title">Cyber Security</h1>
-                <p class="dept-header-subtitle">Digital Defense & Security Systems</p>
-                <p class="dept-header-desc">Protecting digital assets and information systems through advanced security protocols, ethical hacking, and risk management strategies. The Cyber Security department prepares experts for the evolving digital threat landscape.</p>
-            </div>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* HERO VIDEO SECTION */
+        .hero-video {
+            position: relative;
+            height: 90vh;
+            overflow: hidden;
+        }
+
+        .hero-video iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 177.77vh; /* 16:9 ratio */
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        /* Bottom Cybersecurity Text */
+        .hero-text-bottom {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="assets/EMINENCE_JPG.png" height="60">
+            <span class="logo-text">Eminence'26</span>
         </div>
-    </section>
+
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html#departments" class="nav-link">Events</a>
+            <a href="culturals.html" class="nav-link">Culturals</a>
+            <a href="annualday.html" class="nav-link">Annual Day</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 🔥 HERO VIDEO -->
+<section class="hero-video">
+    <iframe
+        src="assets/(cs) intro.mp4"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen>
+    </iframe>
+
+    <!-- Bottom Text -->
+    <div class="hero-text-bottom">Cybersecurity</div>
+</section>
 
     <!-- Technical Events Section -->
     <section class="events-section">
@@ -163,7 +189,7 @@ Description: Protecting digital assets and information systems through advanced 
     </section>
 
     <!-- Footer (same as index.html) -->
-    <footer class="footer">
+       <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
